@@ -1,6 +1,7 @@
 package com.spring.course.springit.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -11,11 +12,12 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @Data // Gives you the @RequiredArgsConstructor and getter /setter
 @ToString
-public class Link {
+public class Link extends Auditable{
 
 	@Id
 	@GeneratedValue

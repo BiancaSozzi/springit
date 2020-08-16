@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class Vote extends Auditable{
 

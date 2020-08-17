@@ -36,6 +36,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+    implementation("com.github.timpeeters:spring-boot-graceful-shutdown:2.+")
     compileJava.inputs.files(processResources)
 
 }

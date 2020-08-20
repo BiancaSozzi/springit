@@ -1,4 +1,4 @@
-package com.spring.course.springit;
+package com.spring.course.springit.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

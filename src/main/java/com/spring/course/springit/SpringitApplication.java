@@ -5,7 +5,7 @@ import com.spring.course.springit.domain.Comment;
 import com.spring.course.springit.domain.Link;
 import com.spring.course.springit.repository.CommentRepository;
 import com.spring.course.springit.repository.LinkRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@SpringBootApplication
+@SpringBootApplication (scanBasePackages = {"com.spring", "com.github.timpeeters.boot.shutdown"})
 @EnableConfigurationProperties(SpringitProperties.class)
 @EnableJpaAuditing
 public class SpringitApplication {
@@ -36,6 +36,11 @@ public class SpringitApplication {
 			commentRepository.save(comment);
 			link.addComment(comment);
 		};
+	}
+
+	@Bean
+	PrettyTime prettyTime() {
+		return new PrettyTime();
 	}
 
 }

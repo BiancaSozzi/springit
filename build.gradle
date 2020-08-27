@@ -35,9 +35,17 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    // To support custom properties
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-    implementation("com.github.timpeeters:spring-boot-graceful-shutdown:2.+")
     compileJava.inputs.files(processResources)
+
+    implementation("com.github.timpeeters:spring-boot-graceful-shutdown:2.+")
+
+    // Show time as "moments ago", "yesterday", "1 year ago"
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+    implementation 'javax.validation:validation-api:2.0.0.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
+
 
 }
 

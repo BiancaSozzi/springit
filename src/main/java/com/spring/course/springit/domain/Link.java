@@ -59,7 +59,10 @@ public class Link extends Auditable{
 	public String getDomainName() throws URISyntaxException {
 		URI uri = new URI(this.url);
 		String domain = uri.getHost();
-		return domain.startsWith("www.") ? domain.substring(4) : domain;
+		if (domain != null){
+			return domain.startsWith("www.") ? domain.substring(4) : domain;
+		}
+		return uri.toString();
 	}
 
 	public String getPrettyTime() {

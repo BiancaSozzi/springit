@@ -32,7 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.loginPage("/login").permitAll()
 				.usernameParameter("email") // because spring is waiting for a "username" field (id in html form)
 				.and()
-			.httpBasic();
+			.logout()
+			.and()
+			.rememberMe(); // saves a cookie that will keep you logged in / can be also storaged
 	}
 
 	//EndpointRequest (to match the endpoints)

@@ -29,6 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //				.anyRequest().authenticated()
 				.and()
 			.formLogin()
+				.loginPage("/login").permitAll()
+				.usernameParameter("email") // because spring is waiting for a "username" field (id in html form)
 				.and()
 			.httpBasic();
 	}

@@ -47,6 +47,7 @@ public class User implements UserDetails {
 	private String password;
 
 	@Column(nullable = false)
+	@NonNull
 	private boolean enabled;
 
 	//JoinTable (is creating the intermediate table in the database)
@@ -57,6 +58,14 @@ public class User implements UserDetails {
 			inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
 	)
 	private Set<Role> roles = new HashSet<>();
+
+	public void addRole(Role role) {
+		roles.add(role);
+	}
+
+	public void addRoles(Set<Role> roles) {
+		roles.forEach(this::addRole);
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

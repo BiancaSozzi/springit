@@ -15,7 +15,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication (scanBasePackages = {"com.spring", "com.github.timpeeters.boot.shutdown"})
 @EnableConfigurationProperties(SpringitProperties.class)
-@EnableJpaAuditing
 public class SpringitApplication {
 
 //	@Autowired

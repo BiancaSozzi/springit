@@ -3,12 +3,13 @@ package com.spring.course.springit.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -19,11 +20,14 @@ public class Vote extends Auditable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int vote;
+
+	@NonNull
+	private short direction;
 
 	// user
 	// link
-	@OneToOne
+	@NonNull
+	@ManyToOne
 	private Link link;
 
 }

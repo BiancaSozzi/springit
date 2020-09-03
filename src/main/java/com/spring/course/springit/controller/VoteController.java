@@ -4,6 +4,7 @@ import com.spring.course.springit.domain.Link;
 import com.spring.course.springit.domain.Vote;
 import com.spring.course.springit.repository.LinkRepository;
 import com.spring.course.springit.repository.VoteRepository;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ public class VoteController {
 		this.linkRepository = linkRepository;
 	}
 
+	@Secured({"ROLE_USER"})
 	@GetMapping("/vote/link/{linkID}/direction/{direction}/votecount/{voteCount}")
 	public int vote(@PathVariable long linkID, @PathVariable short direction, @PathVariable int voteCount) {
 		Optional<Link> fetchedLink = linkRepository.findById(linkID);

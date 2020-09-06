@@ -1,9 +1,12 @@
 package com.spring.course.springit.controller;
 
+import com.spring.course.springit.domain.Comment;
 import com.spring.course.springit.domain.Link;
+import com.spring.course.springit.repository.CommentRepository;
 import com.spring.course.springit.repository.LinkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +24,11 @@ public class LinkController {
 	private static final Logger logger = LoggerFactory.getLogger(LinkController.class);
 
 	private LinkRepository linkRepository;
+	private CommentRepository commentRepository;
 
-	public LinkController(LinkRepository linkRepository) {
+	public LinkController(LinkRepository linkRepository, CommentRepository commentRepository) {
 		this.linkRepository = linkRepository;
+		this.commentRepository = commentRepository;
 	}
 
 	@GetMapping("/")
@@ -36,7 +41,10 @@ public class LinkController {
 	public String read(@PathVariable Long id, Model model) {
 		Optional<Link> link = linkRepository.findById(id);
 		if (link.isPresent()) {
-			model.addAttribute("link", link.get());
+			Link currentLink = link.get();
+			Comment comment = new Comment();
+			model.addAttribute("comment", comment);
+			model.addAttribute("link", currentLink);
 			model.addAttribute("success", model.containsAttribute("success"));
 			return "link/view";
 		} else {
@@ -70,5 +78,26 @@ public class LinkController {
 			return "redirect:/link/{id}";
 		}
 	}
+
+	@Secured({"ROLE_USER"})
+	@PostMapping("/link/{id}/comments")
+	public String addComment(@PathVariable Long id, @Valid Comment comment, BindingResult bindingResult) {
+		Optional<Link> link = linkRepository.findById(id);
+		if (link.isPresent()) {
+			Link theLink = link.get();
+			if (bindingResult.hasErrors()) {
+				logger.info("There was a problem adding a new comment.");
+			} else {
+				Comment myComment = new Comment();
+				myComment.setLink(theLink);
+				myComment.setBody(comment.getBody());
+				commentRepository.save(myComment);
+				theLink.addComment(myComment);
+				logger.info("New comment was saved successfully.");
+			}
+		}
+		return "redirect:/link/" + id;
+	}
+
 
 }

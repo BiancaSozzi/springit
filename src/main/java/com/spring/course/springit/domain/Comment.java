@@ -3,9 +3,11 @@ package com.spring.course.springit.domain;
 import com.spring.course.springit.service.BeanUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import javax.persistence.Entity;
@@ -18,10 +20,9 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Getter @Setter
 public class Comment extends Auditable{
 
 	@Id

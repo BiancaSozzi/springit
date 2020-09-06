@@ -4,8 +4,11 @@ import com.spring.course.springit.service.BeanUtil;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
@@ -24,11 +27,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
-@Data // Gives you the @RequiredArgsConstructor and getter /setter
-@ToString
+@Getter @Setter
 public class Link extends Auditable{
 
 	// Read @NonNull/@Notnull vs @NotEmpty

@@ -1,5 +1,6 @@
 package com.spring.course.springit.domain;
 
+import com.spring.course.springit.validator.PasswordsMatch;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @NoArgsConstructor
+@PasswordsMatch
 public class User implements UserDetails {
 
 	@Id

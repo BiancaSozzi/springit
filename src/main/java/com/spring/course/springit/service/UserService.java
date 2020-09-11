@@ -28,6 +28,7 @@ public class UserService {
 		user.setPassword(secret);
 
 		// Confirm password
+		user.setConfirmPassword(secret); // we need to set it because if not the validator will trigger constraint error
 
 		// assign a role to the user (always type user for now)
 		user.addRole(roleService.findByName("ROLE_USER"));

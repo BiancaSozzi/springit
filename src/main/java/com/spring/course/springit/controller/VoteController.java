@@ -2,8 +2,8 @@ package com.spring.course.springit.controller;
 
 import com.spring.course.springit.domain.Link;
 import com.spring.course.springit.domain.Vote;
-import com.spring.course.springit.repository.LinkRepository;
-import com.spring.course.springit.repository.VoteRepository;
+import com.spring.course.springit.service.LinkService;
+import com.spring.course.springit.service.VoteService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,25 +14,25 @@ import java.util.Optional;
 @RestController
 public class VoteController {
 
-	private VoteRepository voteRepository;
-	private LinkRepository linkRepository;
+	private final VoteService voteService;
+	private final LinkService linkService;
 
-	public VoteController(VoteRepository voteRepository, LinkRepository linkRepository) {
-		this.voteRepository = voteRepository;
-		this.linkRepository = linkRepository;
+	public VoteController(VoteService voteService, LinkService linkService) {
+		this.voteService = voteService;
+		this.linkService = linkService;
 	}
 
 	@Secured({"ROLE_USER"})
 	@GetMapping("/vote/link/{linkID}/direction/{direction}/votecount/{voteCount}")
 	public int vote(@PathVariable long linkID, @PathVariable short direction, @PathVariable int voteCount) {
-		Optional<Link> fetchedLink = linkRepository.findById(linkID);
+		Optional<Link> fetchedLink = linkService.findById(linkID);
 		if (fetchedLink.isPresent()){
 			Link link = fetchedLink.get();
 			Vote vote = new Vote(direction, link);
-			voteRepository.save(vote);
+			voteService.save(vote);
 			int updatedVoteCount = voteCount + direction;
 			link.setVoteCount(updatedVoteCount);
-			linkRepository.save(link);
+			linkService.save(link);
 			return updatedVoteCount;
 		}
 		// if link not found return voteCount

@@ -11,11 +11,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @SpringBootApplication (scanBasePackages = {"com.spring", "com.github.timpeeters.boot.shutdown"})
 @EnableConfigurationProperties(SpringitProperties.class)
+@EnableTransactionManagement // to allow handling transactions with @Transaction
 public class SpringitApplication {
 
 //	@Autowired

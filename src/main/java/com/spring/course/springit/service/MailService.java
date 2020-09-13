@@ -20,7 +20,7 @@ public class MailService {
 	private final JavaMailSender javaMailSender;
 	private final SpringTemplateEngine templateEngine;
 	// Used to redirect to the server when activating the account
-	private final String BASE_URL = "http://localhost:8080";
+	private final String BASE_URL = "http://localhost:9258";
 
 	public MailService(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine) {
 		this.javaMailSender = javaMailSender;
